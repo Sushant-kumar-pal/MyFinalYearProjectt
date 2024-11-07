@@ -1,4 +1,3 @@
----
 
 # **Google Classroom Clone || PRIDIM**
 
@@ -58,3 +57,48 @@ A fully functional **PRIDIM** built with the **MERN stack**. This project allows
 Contributions are welcome! Feel free to fork the project and submit pull requests.
 
 ---
+
+## **PREVIEW**
+
+
+**SIGNUP AND LOGIN**
+![image](https://github.com/user-attachments/assets/22e30df8-8cef-48a3-9320-584df15ea88e)
+![image](https://github.com/user-attachments/assets/1c88abeb-29f6-4093-92c2-09891c799c2e)
+![image](https://github.com/user-attachments/assets/912ccbf5-2349-468a-b0be-6cf7c304bd66)
+
+---
+
+**TEACHER DASHBOARD** 
+
+
+![image](https://github.com/user-attachments/assets/c744c921-92dd-4497-8bbd-da1b82d83996)
+![image](https://github.com/user-attachments/assets/1d5a66ed-b1cf-489d-91f3-ac1a0d0d094a)
+![image](https://github.com/user-attachments/assets/98352687-ad78-45f1-a684-58a282df2665)
+
+---
+ 
+**STUDENT DASHBOARD**
+
+
+![image](https://github.com/user-attachments/assets/37848f48-b983-4cbb-9e75-2afb875a5ade)
+![image](https://github.com/user-attachments/assets/7754eac0-6119-40b7-80c4-c3be77a9b9db)
+![image](https://github.com/user-attachments/assets/9be32ad0-849e-40b1-b401-cc8ead7f0db7)
+
+---
+
+**CREATE, JOIN AND UPDATE**
+
+
+![image](https://github.com/user-attachments/assets/96d09f61-89d4-4afc-b574-84bcbf911495)
+![image](https://github.com/user-attachments/assets/91193c8b-c6c6-4656-8b38-798c53f46798)
+![image](https://github.com/user-attachments/assets/ce879bdb-e84b-4e5d-ac97-df28ff06d07f)
+![image](https://github.com/user-attachments/assets/499046f0-0a18-4073-9ced-23a01ac2ce0e)
+
+
+
+
+
+
+
+
+
