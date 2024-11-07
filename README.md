@@ -94,6 +94,8 @@ Contributions are welcome! Feel free to fork the project and submit pull request
 ![image](https://github.com/user-attachments/assets/ce879bdb-e84b-4e5d-ac97-df28ff06d07f)
 ![image](https://github.com/user-attachments/assets/499046f0-0a18-4073-9ced-23a01ac2ce0e)
 
+**notice** 
+create an folder: uploads
 
 
 
