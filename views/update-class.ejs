@@ -1,0 +1,28 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,h1,hr{color: white !important;}</style>
+<body>
+    <br><br><br>
+    <div class="row container">  
+      
+        <div class="col offset-1">
+            <h1>Update Class</h1>
+            <hr>
+            <form method="post" action="/dashboard/update-class/<%= classinfo._id %>" novalidate  class="needs-validation">
+        <div class="mb-3">
+            <label for="class_name">Class Name</label>
+            <input class="form-control" type="text" id="class_name" name="class_name" value="<%= classinfo.class_name %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="section">Section</label>
+            <input type="text" class="form-control" id="section" name="section" value="<%= classinfo.secion %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" name="subject" value="<%= classinfo.subject %>" required>
+        </div>
+        <button type="submit"  class="btn btn-success">Update Class</button>
+    </form>
+</div>
+</div>    
+</body>
+

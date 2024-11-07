@@ -1,0 +1,33 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,h3,hr{color: white !important;}</style>
+
+<body>
+    <br><br><br>
+    <div class="container " style="margin-left: 1.2rem;">
+        <h3>Create Assignment for <%= classInfo.class_name %></h3>
+        <hr>
+        <form action="/dashboard/create-assignment/<%= classId %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title"> Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Add Title for you Assignment" required>
+            </div><br>
+            <div class="form-group">
+                <label for="description">Descrioption</label>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description For Assignment" required></textarea>
+            </div>
+            <div class="form-group">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label"></label>
+                    <input class="form-control" type="file" id="formFile" name="file" required>
+                  </div>
+            </div>
+            <div class="form-group mb-2">
+                <label for="dueDate">Due Date</label>
+                <input type="date" class="form-control" id="dueDate" name="dueDate" required>
+            </div>
+            <br>
+            <input type="hidden" name="class_id" value="<%= classInfo._id %>">
+            <button type="submit" class="btn btn-primary">Create Assignment</button>
+        </form>
+    </div>
+</body>

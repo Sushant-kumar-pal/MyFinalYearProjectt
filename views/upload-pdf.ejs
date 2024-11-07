@@ -1,0 +1,26 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,hr,h2{color: white !important;}</style>
+    <body>
+        <br><br><br>
+        <div class="row container">
+            <div class="col offset-1 g-3">
+                
+                <h2>Upload File</h2>
+                <hr><br>
+                <form action="/class/add-more/<%= classId %>" method="post" enctype="multipart/form-data" novalidate
+                    class="needs-validation">
+                    <div class=" col mb-3">
+                        <input type="hidden" name="class_id" value="<%= classId %>">
+                       
+                        <input class="form-control" type="file"  name="pdf_file" accept=".pdf" required>
+                    </div>
+                    <div class=" col  ">
+                        <textarea name="Descrioptions" class="form-control mb-3" rows="7" placeholder="Descrioption For File" required></textarea>
+
+                        <button class="btn btn-secondary" type="submit">Upload File</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </body>

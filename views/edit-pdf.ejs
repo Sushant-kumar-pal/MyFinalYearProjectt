@@ -1,0 +1,21 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,h2,hr{color: white !important;}</style>
+<body>
+    <br>
+    <div class="row container">      
+        <div class="col offset-1 g-3">
+            <br><br>
+            <h2>Edit File</h2>
+     <hr><br>
+            <form action="/class/edit-pdf/<%= pdf._id %>" method="post" enctype="multipart/form-data" novalidate class="needs-validation">
+                <div class=" col mb-2 ">
+                    <input class="form-control" type="file" id="pdf_file" name="pdf_file" accept=".pdf">
+                </div>
+                <div class="col">
+                    <textarea name="Descrioptions" class="form-control mb-3" rows="7" ><%= pdf.Descrioption %></textarea>
+                    <button class="btn btn-secondary" type="submit">Update File</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

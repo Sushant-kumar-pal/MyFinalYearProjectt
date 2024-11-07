@@ -1,0 +1,117 @@
+<% layout('/layouts/boilerplate') -%>
+<style>h3,hr{ color:  #afb3b7;}</style>
+<body>
+    <br><br>
+    <% if (createdClasses && createdClasses.length > 0) { %>
+        <h3> <strong>Created</strong></h3>
+       
+        <div class="">
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1" style="width: 90vw;">
+                <% createdClasses.forEach(class1 => { %>
+                    <div class="card col m-3" style="width: 300px; padding: 0;">
+                        <a href="/dashboard/show-detail/<%= class1._id %>">
+                            <img src="<%= class1.background %>" class="object-fit-cover rounded-top" alt="..." style="height: 100px; width: 298px;">
+                            <% if (class1.instructor_id && class1.instructor_id.profile) { %>
+                                <img src="/<%= class1.instructor_id.profile %>" alt="Instructor Profile Picture" style="width:80px; height:80px; object-fit:cover; border-radius:50%; border: 1px solid white;position: absolute;left: 13rem; top: 4rem;">
+                            <% } else { %>
+                                <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="Default Profile Picture" style="width:78px; height:80px; object-fit:cover; border-radius:50%; border: 1px solid white;position: absolute;left: 13rem;top: 4rem;">
+                            <% } %>
+                            <div class="card-body">
+                                <h5 class="card-title"><u><%= class1.subject %></u></h5>
+                                <p class="card-text"><b><i><%= class1.class_name %></i></b> <b><%= class1.secion%></b></p>
+                                <br>
+                                <hr>
+                                <a href="dashboard/update-class/<%= class1._id %>" class="btn btn-success w-100">Update Class</a>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% } %>
+    
+   
+    <% if (userMemberships && userMemberships.length > 0) { %>
+        <hr>
+        <h3> <strong>Enrolled</strong></h3>
+        <div class="">
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1" style="width: 90vw;">
+                <% userMemberships.forEach(membership => { %>
+                    <div class="card col m-3" style="width: 300px; padding: 0;">
+                        <a href="/dashboard/show-detail/<%= membership.class_id._id %>">
+                            <img src="<%= membership.class_id.background %>" class="object-fit-cover rounded-top" alt="..." style="height: 100px; width: 298px;">
+                            <% if (membership.class_id.instructor_id && membership.class_id.instructor_id.profile) { %>
+                                <img src="/<%= membership.class_id.instructor_id.profile %>" alt="Instructor Profile Picture" style="width:80px; height:80px; object-fit:cover; border-radius:50%; border: 1px solid white;position: absolute;left: 13rem;top: 4rem;">
+                            <% } else { %>
+                                <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="Default Profile Picture" style="width:80px; height:80px; object-fit:cover; border-radius:50%; border: 1px solid white;position: absolute;left: 13rem;top: 4rem;">
+                            <% } %>
+                            <div class="card-body">
+                                <h5 class="card-title"><u><%= membership.class_id.subject %></u></h5>
+                                <p class="card-text"><b><i><%= membership.class_id.class_name %></i></b> <b><%= membership.class_id.secion %></b></p>
+                                <br><br>
+                                <form method="post" action="/leave-class/<%= membership.class_id._id %>" style="display: inline;">
+                                    <hr>
+                                    <button type="submit" class="btn btn-danger w-100">Leave Class</button>
+                                </form>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% } %>
+
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" fdprocessedid="u0o128" style="position: fixed;right: 0; bottom:0;">
+        <% if (profile) { %>
+            <img src="/<%= profile %>" alt="Profile Picture" style="width:80px; height:80px; object-fit:cover; border-radius:80%; border: 1px solid white;">
+        <% } else { %>
+            <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="Default Profile Picture" style="width:80px; height:80px; object-fit:cover; border-radius:80%; border: 2px solid white;">
+        <% } %>
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile Picture</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/dashboard/profile/update" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="profilePic" class="col-form-label">Upload Profile Picture:</label>
+                            <input type="file" class="form-control" name="profilePic" accept="image/*" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% if (createdClasses.length == 0 && userMemberships.length == 0) { %>
+        <div class="card mt-5 mx-auto p-4 shadow-lg rounded" style="max-width: 500px; background-color: #f9f9f9;">
+            <div class="card-body text-center">
+                <h5 class="card-title text-primary">🎉 Welcome, Superstar!</h5>
+                <h6 class="card-subtitle mb-3 text-muted">Your learning journey starts here.</h6>
+                <hr>
+                <p class="card-text lead">
+                    Ready to dive into your next class? Whether you're here to join a new group or create one yourself, the choice is yours! Let's get started!
+                </p>
+                <br>
+                <div class="d-flex justify-content-around">
+                    <a class="btn btn-success btn-lg" href="/class-join">
+                        <i class="fas fa-sign-in-alt"></i> Join a Class
+                    </a>
+                    <a class="btn btn-primary btn-lg" href="/create-class">
+                        <i class="fas fa-plus-circle"></i> Create a Class
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+    <% } %>
+</body>

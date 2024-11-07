@@ -1,0 +1,80 @@
+*{
+    
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    
+}
+
+body{
+    background-color: #5a636a;
+}
+
+.card,.card-body{  
+    color: #5a636a !important;
+}
+a{
+    color: #5a636a
+}
+.nav{
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    --bs-bg-opacity: 1;
+    /* background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important; */
+    background-color: #afb3b7;
+}
+.fa-bars{
+    font-size: x-large;
+
+    padding: 12px;
+    margin: -12px;
+}
+.navbar-brand{
+    font-size: 22px;
+    margin-left: .625rem;
+    margin: -12px;
+    padding: 18px;
+    
+}
+.nav-link{
+    color:  #363636 !important;
+    
+}
+
+.s-nav{
+    letter-spacing: .0178571429em;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #3c4043;
+    border-radius: 10px;
+}
+
+.s-nav:hover{
+    color: aliceblue !important;
+    background-color: #1a73e8 !important;
+    border-radius: 10px;
+}
+
+.offcanvas {
+    width: 300px !important;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.offcanvas-body{
+    margin-top: 4rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+.black{
+    color: black !important;
+}
+
+input,textarea{
+    color:#363636 !important;
+}

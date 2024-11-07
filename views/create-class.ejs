@@ -1,0 +1,68 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,h1{color: white !important;}</style>
+<% 
+const imageUrls = [
+'https://i.pinimg.com/236x/65/e2/0a/65e20aeab7d1b5e314d218a828c3b022.jpg',
+'https://i.pinimg.com/564x/d4/47/b7/d447b7173fae856ee277ccb860e395a1.jpg',
+'https://i.pinimg.com/564x/86/c7/05/86c7051bcd7d2c959da7fd37d895361e.jpg',
+'https://i.pinimg.com/564x/3b/7d/ed/3b7ded1302af0e13dc640687510fd95f.jpg',
+'https://i.pinimg.com/564x/92/09/2f/92092fd9cb67a4f33a15633488f1d1df.jpg',
+'https://i.pinimg.com/236x/e4/12/7c/e4127c15dee41da88eb53c1b629ec811.jpg',
+'https://i.pinimg.com/736x/ec/90/b1/ec90b1de3bc959d86d0a5f498b2feb19.jpg',
+'https://i.pinimg.com/736x/77/58/29/775829a696cb96a754fad9210cd2d230.jpg',
+'https://i.pinimg.com/564x/27/36/5e/27365e6f9770f422cca7b8f1f7b2edd1.jpg',
+'https://i.pinimg.com/564x/53/a4/ce/53a4cec01d7b872275592ca0477ebf08.jpg'
+
+];
+function getRandomImage(imagesArray) {
+    const randomIndex = Math.floor(Math.random() * imagesArray.length);
+    return imagesArray[randomIndex];
+}
+ %>
+
+    <body>
+        <br><br>
+        <div class="row container">
+            <div class="col offset-1 g-3">
+                <h1>Create Class</h1>
+                <hr style="color: white;">
+                <form action="/create-class" method="post" novalidate class="needs-validation">
+                   
+                    <div class="mb-2">
+
+                        <label for="class_name"  class="form-label">Class Name</label>
+                        <input type="text" id="class_name" name="class_name" placeholder="class_name" class="form-control" required>
+                        <div class="invalid-feedback">
+                            must enter class-name
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject"  class="form-label">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="subject">
+                    </div>
+                    <div class="row">
+                    <div class="mb-3 col-4">
+
+                        <label for="class_code" class="form-label">Class Code</label>
+                        <input type="text" id="class_code" placeholder="class_code"value="<%= uniqueCode %>"  name="class_code" class="form-control" required>
+                        <div class="invalid-feedback">
+                            You must have Subject code
+                          </div>
+                    </div>
+                    <div class="mb-3 col-8">
+                        <label for="secion"  class="form-label">Section</label>
+                        <input type="text" id="secion" name="secion" placeholder="secion" class="form-control" >
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="background"></label>
+                        <input type="text" hidden class="form-control-file" id="background" name="background"  value="<%= getRandomImage( imageUrls) %>">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">Create Class</button>
+                </form>
+            </div>
+        </div>
+    </body>
+

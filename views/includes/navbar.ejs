@@ -1,0 +1,77 @@
+
+<nav class="nav p-2 border border-4 black">
+    <a class="nav-link black" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars black"></i>&nbsp; </a>
+
+    <div class="offcanvas offcanvas-start border border-5 black" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel" style="width: 300px;">
+        <div class="offcanvas-header black">
+            <h5 class="offcanvas-title" id="offcanvasLabel"><i class="fa-solid fa-users-rectangle black"></i>&nbsp; PRIDIM</h5>
+            <button type="button" class="btn-close black" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body black">
+            <a class="nav-link active s-nav " aria-current="page" href="/dashboard"><i class="fa-solid fa-house black"></i>&nbsp; &nbsp; Home</a>
+            <a class="nav-link active s-nav " aria-current="page" href="#"><i class="fa-regular fa-calendar black"></i>&nbsp; &nbsp; Calendar</a>
+            <hr>
+            
+            <!-- Teaching Dropdown -->
+            <p class="d-inline-flex gap-1  ">
+                <a class=" nav-link active collapsed dropdown-toggle s-nav black" data-bs-toggle="collapse" href="#Teacher"  aria-expanded="false"  >
+                    <i class="fa-solid fa-user-group black"></i>&nbsp; &nbsp; Teaching
+                </a>
+               
+              </p>
+              <div class="collapse" id="Teacher" style="">
+                <div class="card card-body">
+                    <ul >
+                        <% createdClasses.forEach(classInfo => { %>
+                            <li><a class="dropdown-item  text-truncate" href="/dashboard/show-detail/<%= classInfo._id %>"><%= classInfo.class_name %> / <%= classInfo.subject %></a></li>
+                        <% }) %>
+                    </ul>
+                </div>
+              </div>
+              
+
+            <hr>
+            <p class="d-inline-flex gap-1  ">
+                <a class=" nav-link active collapsed dropdown-toggle s-nav " data-bs-toggle="collapse" href="#Enroll"  aria-expanded="false"  >
+                    <i class="fa-solid fa-graduation-cap black"></i>&nbsp; &nbsp; Enrolled
+                </a>
+               
+              </p>
+              <div class="collapse" id="Enroll" style="">
+                <div class="card card-body">
+                    <ul >
+                        <% joinedClasses.forEach(classInfo => { %>
+                            <li><a class="dropdown-item text-truncate" href="/dashboard/show-detail/<%= classInfo._id %>"><%= classInfo.class_name %>  / <%= classInfo.subject %></a></li>
+                        <% }) %>
+                    </ul>
+                </div>
+              </div>
+
+           
+        </div>
+    </div>
+    
+    <a class="navbar-brand na black" href="/dashboard"><i class="fa-solid fa-users-rectangle black"></i>&nbsp; PRIDIM</a>
+    
+    <div class="d-flex flex-row ms-auto">
+        <div class="dropdown">
+            <button class="btn rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.2rem;">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/class-join">Join Class</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/create-class">Create Class</a></li>
+            </ul>
+        </div>
+        
+        <div class="d-flex flex-row" style="font-size: 1.2rem;">
+            <% if (!currentUser) { %>
+                <a class="nav-link" href="/signup">SignUp</a>
+                <a class="nav-link" href="/login">LogIn</a>
+            <% } else { %>
+                <a class="nav-link" href="/logout">Logout</a>
+            <% } %>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,73 @@
+<% layout('/layouts/boilerplate') -%>
+
+<body>
+    <ul class="nav nav-tabs" style="position: fixed; top: 64px; z-index: 0; width: 100%">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/dashboard/show-detail/<%= classId %>">Stream</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/dashboard/show-detail/<%= classId %>/Assignment">Class Work</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard/show-detail/<%= classId %>/people">People</a>
+        </li>
+    </ul>
+    
+
+    <div class="shadow-md bg-body-tertiary rounded w-100 p-3 border border-3" style="margin-top: 5rem;">
+        <div class="d-flex justify-content-between p-1">
+            <h3>Class Work</h3>
+            <% if (userId === instructorId) { %>
+                <a href="/dashboard/create-assignment/<%= classId %>">
+                    <i class="fa-solid fa-plus" style="font-size: x-large; color: gray;"></i>
+                </a>
+            <% } %>
+        </div>
+
+        <ul class="list-group">
+            <% assignments.forEach(assignment => { %>
+                <li class="container mb-3" style="list-style-type: none; margin: 10px;">
+                    <h5><%= assignment.title %></h5>
+                    <p><%= assignment.description %></p>
+                    <p>Due Date: <%= new Date(assignment.dueDate).toLocaleDateString() %></p>
+                    <p>Created by: <%= assignment.createdBy.username %></p>
+
+                    <% if (assignment.file_url) { %>
+                        <a href="/<%= assignment.file_url %>" class="btn btn-primary">View File</a>
+                    <% } %>
+
+                    <% if (userId != instructorId) { %>
+                        <% if (new Date() > new Date(assignment.dueDate)) { %>
+                            <button class="btn btn-secondary" disabled>Due Date Passed</button>
+                        <% } else { %>
+                            <a href="/dashboard/assignments/submit/<%= assignment._id %>" class="btn btn-primary">Submit Assignment</a>
+                        <% } %>
+                    <% } %>
+
+                    <% if (userId === instructorId) { %>
+                        <p class="d-inline-flex gap-1">
+                            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= assignment._id %>" aria-expanded="false" aria-controls="collapse-<%= assignment._id %>">
+                                Submissions
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapse-<%= assignment._id %>">
+                            <div class="card card-body">
+                                <ul>
+                                    <% assignment.submissions.forEach(submission => { %>
+                                        <li class="mb-2">
+                                            <p>Submitted by: <%= submission.user_id.username %></p>
+                                            <p>Submitted at: <%= new Date(submission.submittedAt).toLocaleDateString() %></p>
+                                            <a href="/<%= submission.file_url %>" class="btn btn-primary">View</a>
+                                        </li>
+                                        <hr>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
+                </li>
+                <hr>
+            <% }) %>
+        </ul>
+    </div>
+</body>

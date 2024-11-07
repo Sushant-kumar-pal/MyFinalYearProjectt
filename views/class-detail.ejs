@@ -1,0 +1,239 @@
+<% layout('/layouts/boilerplate') -%>
+<style>i,a{
+    color: rgba(11, 11, 11, 0.539) !important;
+}</style>
+<body>
+    <ul class="nav nav-tabs" style="position: fixed; top: 64px; z-index: 0; width: 100%">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/dashboard/show-detail/<%= classId %>">Stream</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/dashboard/show-detail/<%= classId %>/Assignment">Class_Work</a>
+          </li>
+          
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/show-detail/<%= classId %>/people">people</a>
+        </li>
+        
+      </ul>
+   
+    <div class="d-flex " style="margin-top: 5rem;"><br>
+      
+        <div class="shadow-lg bg-body-tertiary rounded border border-3 " style="height: 8rem; width: 152px; margin-right: 0.6rem; padding: .8rem;"> 
+             <% if (classCreatorId === userId) { %>
+            class_code
+            <h2></strong> <%= class_code %> </h2> 
+            <%} else{%>
+                techer
+                <h3></strong> <%=  classCreatorName %> </h2>
+             <%}%>
+      </div>
+      
+      <div style="width: 71rem;">
+        <div class="announcement mb-3 shadow-lg bg-body-tertiary rounded w-100 p-3 border border-3">
+            <h3 style="color: rgb(53, 130, 244);">Announcement</h3>
+            <% commentsWithoutPDF.forEach(comment => { %>
+                <div style="padding-left: 1rem">
+                    <div class="d-flex flex-row mb-1">
+                        
+                        <div class="d-flex flex-row">
+                            <span style="margin-right:1rem ;">
+                                <% if (comment.user_id.profile){%>
+                                
+                                <img src="/<%=  comment.user_id.profile   %>" alt="img" style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+                                <% }else{ %>
+                                    
+                                    <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="img" style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+                                <% } %>
+
+                            </span>
+                            <span>
+                                <span class="fw-bold pl-1 "><%= comment.user_id ? comment.user_id.username : 'Unknown User' %></span>
+                                <br>
+                                <span class="fw-light lh-1"><%= new Date(comment.comment_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) %></span>
+                            </span>
+                        </div>
+                        <% if (comment.user_id && (comment.user_id._id.equals(userId) || classCreatorId === userId)) { %>
+                            <div class="dropdown ms-auto p-2">
+                                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="padding: 10px;">
+                                   
+                                    <li>
+                                        
+                                       <a href="/class/delete-comment/<%= comment._id %>?classId=<%= classId %>" class="dropdown-item link-danger   " onclick="event.preventDefault(); document.getElementById('delete-comment-form-<%= comment._id %>').submit();">Delete</a>
+                                       <form id="delete-comment-form-<%= comment._id %>" method="post" action="/class/delete-comment/<%=  comment._id %>?classId=<%= classId %>" style="display: none;">
+                                       </form>     
+                                      </li>
+                                </ul>
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <br>
+                    <p class="lh-base text-secondary-emphasis" >
+                        <%= comment.comment_text %>
+                    </p> <hr class="divider">
+                </div>
+            <% }) %>
+            
+            <% if (classCreatorId === userId) { %>
+                <form method="post" action="/class/add-comment-without-pdf" class="needs-validation" novalidate style="padding-left: 1rem">
+                    <input type="hidden" name="class_id" value="<%= classId %>">
+                    <textarea name="comment_text" required class="form-control" rows="3"></textarea>
+                    <div class="invalid-feedback">
+                        Details needed for announcement
+                    </div>
+                    <br>
+                    <div class="btn-toolbar">
+                        <div class=" me-2">
+                            <button type="submit" class="btn btn-primary">Add Comment</button>
+                        </div>
+                </form>
+                <form method="get" action="/class/add-more/<%= classId %>" class="needs-validation" novalidate>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Upload new file</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+        
+        <% data.forEach(pdf => { %>
+            <div class="mb-3 shadow bg-body-tertiary rounded w-100 p-3 border border-2">
+                <div style="padding-left: 1rem">
+                    <div class="d-flex flex-row mb-1">
+                        
+                        <div class="d-flex flex-row mb-3">
+
+                            
+                            <span style="margin-right:1rem ;">
+                                <% if( pdf.uploader_id.profile) {%>
+                                <img src="/<%= pdf.uploader_id.profile %>" alt="Profile Picture" style="width:50px; height:50px; object-fit:cover; border-radius:50%;"></span>
+                                <% }else{ %>
+                                    
+                                    <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="img" style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+                                <% } %>
+                            <span>
+                                <span class="fw-bold pl-1"><%= pdf.uploader_id ? pdf.uploader_id.username : 'Unknown User' %></span>
+                                <br>
+                                <span class="fw-light lh-1" ><%= new Date().toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) %></span>
+                            </span>
+ 
+                            
+                        </div>
+                    </div>
+                    <p class="lh-base text-secondary-emphasis" >
+                        <%= pdf.Descrioption %>
+                    </p>
+                    <div class="d-flex flex-row mb-1">
+                        <div class="" style="margin-right: 1rem;">
+                            <img class="bd-placeholder-img object-fit-contain border" width="50" height="50" src="https://tse2.mm.bing.net/th?id=OIP.HoxzXyByoP2C0Z9hgzwlBAHaHa&pid=Api&P=0&h=180">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="fw-bold pl-1"><% if (pdf.file_url.endsWith('.pdf')) { %>
+                                <a href="/<%= pdf.file_url %>" target="_blank"><i class="fa-solid fa-eye"></i> View PDF</a>
+                                <% } else { %>
+                                <a href="/<%= pdf.file_url %>" download><i class="fa-solid fa-download" ></i> Download File</a>
+                                <% } %>
+                            </div>
+                            <div class="fw-bold pl-1">
+                                <%= pdf.originalFileName %> 
+                            </div>
+                        </div>
+                        <% if (pdf.uploader_id.equals(userId)  || classCreatorId === userId) { %>
+                            <div class=" ms-auto p-2">
+                                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="padding: 10px;">
+                                    <li><% if (pdf.uploader_id.equals(userId)) { %>
+                                        <a href="/class/edit-pdf/<%= pdf._id %>" class="link-secondary">Edit PDF</a>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('delete-pdf-form-<%= pdf._id %>').submit();" class="link-danger">Delete PDF</a>
+                                        <form id="delete-pdf-form-<%= pdf._id %>" method="post" action="/class/delete-pdf/<%= pdf._id %>" class="d-none"></form>
+                                    </li>
+                                </ul>
+                            </div>
+                        <% } %>
+                    </div>
+                    <hr class="divider">
+                    <% commentsWithPDF.filter(comment => comment.pdf_id.equals(pdf._id)).forEach(comment => { %>
+                        <div>
+                            <div class="d-flex flex-row mb-1">
+                                <div class="d-flex flex-row mb-3">
+                                    <span style="margin-right:1rem ;">
+                                        
+                                        <% if( comment.user_id.profile){ %>
+                                        <img src="/<%=  comment.user_id.profile  %>" alt="img" style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+                                        <% }else{ %>
+                                    
+                                            <img src="https://tse3.mm.bing.net/th?id=OIP.BJCe-jcOGmwdJqWrPAYoegHaE7&pid=Api&P=0&h=180" alt="img" style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
+                                        <% } %>
+                                    </span>
+                                    <span>
+                                        
+                                    <span class="fw-bold pl-1"><%= comment.user_id ? comment.user_id.username : 'Unknown User' %></span>
+                                    <br>                                    
+                                    <span class="fw-light lh-1"><%= new Date(comment.comment_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) %></span>
+                                    </span>
+                                </div>
+                                <% if (comment.user_id && (comment.user_id._id.equals(userId) || classCreatorId === userId)) { %>
+                                    <div class=" ms-auto p-2">
+                                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" style="padding: 10px;">
+                                           
+                                            <li>
+                                                
+                                               <a href="/class/delete-comment/<%= comment._id %>?classId=<%= classId %>" class="dropdown-item link-danger   " onclick="event.preventDefault(); document.getElementById('delete-comment-form-<%= comment._id %>').submit();">Delete</a>
+                                               <form id="delete-comment-form-<%= comment._id %>" method="post" action="/class/delete-comment/<%=  comment._id %>?classId=<%= classId %>" style="display: none;">
+                                               </form>     
+                                              </li>
+                                        </ul>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <p class="lh-base text-secondary-emphasis" >
+                                <%= comment.comment_text %>
+                            </p>
+                           
+                                <hr class="divider">
+                           
+                        </div>
+                    <% }) %>
+                    <div class="row">
+                        <div class="col-11">
+                            <form method="post" action="/class/add-comment" class="needs-validation" novalidate>
+                                <input type="hidden" name="pdf_id" value="<%= pdf._id %>">
+                                <input type="text" placeholder="Add Comment" name="comment_text" class="form-control rounded-pill" required>
+                                <br>
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-secondary rounded-circle">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        <br><br>
+        
+        <%if( classCreatorId !== userId ){%>
+        <div class=" border-bottom border-success col-15 text-center" style="position: fixed;  bottom: 0;  background: white; padding: .50rem; width: 74.7%; border: 2px solid; border-radius: 1rem;">
+            
+            <div >
+                <form method="get" action="/class/add-more/<%= classId %>" class="needs-validation" novalidate>
+                    <button type="submit" class="btn btn-success rounded-circle"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                    <a href="/class/add-more/<%= classId %>" class="text-success">Student  upload your Work</a>
+                </form>
+            </div>
+            </div>
+        <% } %>
+    </div>
+</body>

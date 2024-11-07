@@ -1,0 +1,16 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,hr,h3{color: white !important;}</style>
+<body>
+    <br><br>
+    <div class="container mt-5">
+        <h3>Submit Assignment: <%= assignment.title %></h3>
+        <hr>
+        <form action="/dashboard/assignments/submit/<%= assignment._id %>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label"></label>
+                <input class="form-control" type="file" id="formFile" name="file" required>
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>

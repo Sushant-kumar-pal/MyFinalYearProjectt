@@ -1,0 +1,29 @@
+<% layout('/layouts/boilerplate') -%>
+<style>form,h1{color:white}</style>
+    <body>
+<br>
+        <form method="post" action="/class-join" novalidate class="needs-validation">
+            <div class="container row">
+
+                <div class="col-8 offset-2">
+                    <br><br>
+                    <h2>Join class</h2>
+                    
+                    <hr>
+                    <label for="class_code" class="form-label">Class_code</label>
+                    <input type="text" placeholder="enter class code" name="class_code" id="class_code " required
+                        class="form-control">
+                    <div class="invalid-feedback">
+                        You must enter Class-Code for join in classs
+                    </div>
+                    
+                    <div class="mt-2"><button type="submit" class="btn btn-success">join</button></div>
+                    
+
+
+                </div>
+
+            </div>
+
+        </form>
+    </body>
