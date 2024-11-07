@@ -1,16 +1,14 @@
-Certainly! Here’s the README content you can directly copy and paste into your GitHub repository:
-
 ---
 
-# **Google Classroom Clone**
+# **Google Classroom Clone || PRIDIM**
 
 ## **Description**
-A fully functional clone of Google Classroom built with the **MERN stack**. This project allows teachers and students to interact in a virtual classroom environment, facilitating file uploads, assignments, and real-time communication.
+A fully functional **PRIDIM** built with the **MERN stack**. This project allows teachers and students to interact in a virtual classroom environment, facilitating file uploads, assignments, and real-time communication.
 
 ## **Features**
 1. **Authentication System**  
    - Login and signup with role-based access control (Teacher/Student).
-   - JWT-based authentication to secure API routes.
+   - Session-based authentication to secure API routes.
 
 2. **Classroom Management**  
    - Create and join classrooms.
@@ -59,6 +57,4 @@ A fully functional clone of Google Classroom built with the **MERN stack**. This
 ## **Contributing**
 Contributions are welcome! Feel free to fork the project and submit pull requests.
 
---- 
-
-This will look great on GitHub! Let me know if you need more sections.
+---
